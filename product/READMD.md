@@ -4,18 +4,30 @@
 * pull mangoDB image 
 ```
 docker pull mongodb/mongodb-community-server
-docker run --name mongo -d mongodb/mongodb-community-server:latest
 ```
 
 ### Not first time running mangoDB
-* run in docker
+## one click
 ```
-docker start [container_id]
+./startsh.sh
+./stopsh.sh
+```
+
+* if permission denied
+```
+chmod 744 ./startsh.sh 
+chmod 744 ./stopsh.sh
+```
+## More granular
+* run in docker and expose map local 27017 port to container 27017
+```
+docker run -p 27017:27017 --name mongo -d mongodb/mongodb-community-server:latest
 ```
 
 * Check container running
 ```
-docker container ls
+docker ps
+docker port mongo
 ```
 * Connect to MongoDb Deployment with mangosh
 ```
@@ -25,6 +37,7 @@ docker exec -it mongo mongosh
 * stop the container
 ```
 docker stop [container_id]
+docker rm [container_id]
 ```
 
 ### compile the project into a jar file
